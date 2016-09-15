@@ -42,6 +42,7 @@ class influxdb::server (
   $compact_min_file_count                       = $influxdb::params::compact_min_file_count,
   $compact_full_write_cold_duration             = $influxdb::params::compact_full_write_cold_duration,
   $max_points_per_block                         = $influxdb::params::max_points_per_block,
+  $max_connection_limit                         = $influxdb::params::max_connection_limit,
 
   $hinted_handoff_enabled                       = $influxdb::params::hinted_handoff_enabled,
   $hinted_handoff_dir                           = $influxdb::params::hinted_handoff_dir,
@@ -54,6 +55,10 @@ class influxdb::server (
 
   $shard_writer_timeout                         = $influxdb::params::shard_writer_timeout,
   $cluster_write_timeout                        = $influxdb::params::cluster_write_timeout,
+  $max_concurrent_queries                       = $influxdb::params::max_concurrent_queries,
+  $query_timeout                                = $influxdb::params::query_timeout,
+  $log_queries_after                            = $influxdb::params::log_queries_after,
+  $max_select_series                            = $influxdb::params::max_select_series,
 
   $retention_enabled                            = $influxdb::params::retention_enabled,
   $retention_check_interval                     = $influxdb::params::retention_check_interval,
