@@ -2,6 +2,7 @@
 #
 
 reporting-disabled = <%= @reporting_disabled %>
+max-series-per-database = 0
 
 [meta]
   enabled = true
@@ -23,7 +24,7 @@ reporting-disabled = <%= @reporting_disabled %>
   wal-partition-flush-delay = "<%= @wal_partition_flush_delay %>"
   wal-dir = "<%= @wal_dir %>"
   wal-logging-enabled = <%= @wal_logging_enabled %>
-  data-logging-enabled = <%= @data_logging_enabled %>
+  trace-logging-enabled = <%= @trace_logging_enabled %>
 <% if @wal_ready_series_size -%>
   wal-ready-series-size = <%= @wal_ready_series_size %>
 <% end -%>
@@ -71,9 +72,21 @@ reporting-disabled = <%= @reporting_disabled %>
   retry-max-interval = "<%= @hinted_handoff_retry_max_interval %>"
   purge-interval = "<%= @hinted_handoff_purge_interval %>"
 
-[cluster]
+[coordinator]
   shard-writer-timeout = "<%= @shard_writer_timeout %>"
   write-timeout = "<%= @cluster_write_timeout %>"
+<% if @max_concurrent_queries %>
+  max-concurrent-queries = "<%= @max_concurrent_queries %>"
+<% end %>
+<% if @query_timeout %>
+  query-timeout = "<%= @query_timeout %>"
+<% end %>
+<% if @log_queries_after %>
+  log-queries-after = "<%= @log_queries_after %>"
+<% end %>
+<% if @max_select_series %>
+  max-select-series = <%= @max_select_series %>
+<% end %>
 
 [retention]
   enabled = <%= @retention_enabled %>
@@ -104,6 +117,9 @@ reporting-disabled = <%= @reporting_disabled %>
   pprof-enabled = <%= @http_pprof_enabled %>
   https-enabled = <%= @http_https_enabled %>
   https-certificate = "<%= @http_https_certificate %>"
+<% if @max_connection_limit %>
+  max-connection-limit = <%= @max_connection_limit %>
+<% end %>
 
 <% if @graphite_options and ! @graphite_options.empty? -%>
 <% if @graphite_options.is_a?(Hash) -%>
