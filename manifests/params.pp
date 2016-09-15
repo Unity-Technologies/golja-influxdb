@@ -41,6 +41,7 @@ class influxdb::params {
   $compact_min_file_count                       = undef
   $compact_full_write_cold_duration             = undef
   $max_points_per_block                         = undef
+  $max_connection_limit                         = undef
 
   $hinted_handoff_enabled                       = true
   $hinted_handoff_dir                           = '/var/lib/influxdb/hh'
@@ -53,6 +54,10 @@ class influxdb::params {
 
   $shard_writer_timeout                         = '5s'
   $cluster_write_timeout                        = '10s'
+  $max_concurrent_queries                       = undef
+  $query_timeout                                = undef
+  $log_queries_after                            = undef
+  $max_select_series                            = undef
 
   $retention_enabled                            = true
   $retention_check_interval                     = '30m'

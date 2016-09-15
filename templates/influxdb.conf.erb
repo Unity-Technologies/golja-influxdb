@@ -75,18 +75,18 @@ max-series-per-database = 0
 [coordinator]
   shard-writer-timeout = "<%= @shard_writer_timeout %>"
   write-timeout = "<%= @cluster_write_timeout %>"
-<% if @max_concurrent_queries %>
-  max-concurrent-queries = "<%= @max_concurrent_queries %>"
-<% end %>
-<% if @query_timeout %>
+<% if @max_concurrent_queries -%>
+  max-concurrent-queries = <%= @max_concurrent_queries %>
+<% end -%>
+<% if @query_timeout -%>
   query-timeout = "<%= @query_timeout %>"
-<% end %>
-<% if @log_queries_after %>
+<% end -%>
+<% if @log_queries_after -%>
   log-queries-after = "<%= @log_queries_after %>"
-<% end %>
-<% if @max_select_series %>
+<% end -%>
+<% if @max_select_series -%>
   max-select-series = <%= @max_select_series %>
-<% end %>
+<% end -%>
 
 [retention]
   enabled = <%= @retention_enabled %>
@@ -117,9 +117,9 @@ max-series-per-database = 0
   pprof-enabled = <%= @http_pprof_enabled %>
   https-enabled = <%= @http_https_enabled %>
   https-certificate = "<%= @http_https_certificate %>"
-<% if @max_connection_limit %>
+<% if @max_connection_limit -%>
   max-connection-limit = <%= @max_connection_limit %>
-<% end %>
+<% end -%>
 
 <% if @graphite_options and ! @graphite_options.empty? -%>
 <% if @graphite_options.is_a?(Hash) -%>
