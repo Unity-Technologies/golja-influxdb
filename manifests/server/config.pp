@@ -54,6 +54,7 @@ class influxdb::server::config {
   $hinted_handoff_retry_max_interval            = $influxdb::server::hinted_handoff_retry_max_interval
   $hinted_handoff_purge_interval                = $influxdb::server::hinted_handoff_purge_interval
 
+  $shard_writer_timeout                         = $influxdb::server::shard_writer_timeout
   $cluster_write_timeout                        = $influxdb::server::cluster_write_timeout
   $max_concurrent_queries                       = $influxdb::server::max_concurrent_queries
   $query_timeout                                = $influxdb::server::query_timeout
