@@ -26,6 +26,14 @@ such as databases, users, and privileges.
 
 ## Deprecation Warning
 
+Notes for version 3.1.1+:
+
+influxdb 1.0.0 contains [breaking changes](https://github.com/influxdata/influxdb/blob/master/CHANGELOG.md#v100-2016-09-08)
+which require changing the `data_logging_enabled` config attribute to `trace_logging_enabled`.
+The other configuration changes are managed by the `influxdb.conf.erb` template already.
+
+Notes for versions older than 3.1.1:
+
 This release is a major refactoring of the module which means that the API
 changed in backwards incompatible ways. If your project depends on the old API
 and you need to use influxdb prior to 0.10.X, please pin your module
@@ -118,17 +126,17 @@ Enable UDP listener
 ```puppet
 $udp_options = [
     { 'enabled'       => true,
-      'bind-address'  => '":8089"',
-      'database'      => '"udp_db1"',
+      'bind-address'  => ':8089',
+      'database'      => 'udp_db1',
       'batch-size'    => 10000,
-      'batch-timeout' => '"1s"',
+      'batch-timeout' => '1s',
       'batch-pending' => 5,
     },
     { 'enabled'       => true,
-      'bind-address'  => '":8090"',
-      'database'      => '"udp_db2"',
+      'bind-address'  => ':8090',
+      'database'      => 'udp_db2',
       'batch-size'    => 10000,
-      'batch-timeout' => '"1s"',
+      'batch-timeout' => '1s',
       'batch-pending' => 5,
     },
 ]
@@ -268,61 +276,6 @@ Enable WAL logging.
 NEW in 0.9.3+
 Default: true
 
-##### `wal_ready_series_size`
-
-When a series in the WAL in-memory cache reaches this size in bytes it is
-marked as ready to flush to the index.
-NEW in 0.9.3+
-Default: 25600
-
-##### `wal_compaction_threshold`
-
-Flush and compact a partition once this ratio of series are over the ready size.
-NEW in 0.9.3+
-Default: 0.6
-
-##### `wal_max_series_size`
-
-Force a flush and compaction if any series in a partition
-gets above this size in bytes.
-NEW in 0.9.3+
-Default: 2097152
-
-##### `wal_flush_cold_interval`
-
-Force a flush of all series and full compaction if there have been
-no writes in this amount of time.
-This is useful for ensuring that shards that are cold for writes
-don't keep a bunch of data cached in memory and in the WAL.
-NEW in 0.9.3+
-Default: 10m
-
-##### `wal_partition_size_threshold`
-
-Force a partition to flush its largest series if it reaches
-this approximate size in bytes.
-Remember there are 5 partitions so you'll need at least
-5x this amount of memory. The more memory you have, the bigger this can be.
-NEW in 0.9.3+Default: 20971520
-
-##### `max_wal_size`
-
-Maximum size the WAL can reach before a flush.
-*DEPRECATED* since version 0.9.3.
-Default: 100MB
-
-##### `wal_flush_interval`
-
-Maximum time data can sit in WAL before a flush.
-*DEPRECATED* since version 0.9.3.
-Default: 10m
-
-##### `wal_partition_flush_delay`
-
-The delay time between each WAL partition being flushed.
-*DEPRECATED* since version 0.9.3.
-Default: 2s
-
 ##### `shard_writer_timeout`
 
 The time within which a shard must respond to write.
@@ -395,6 +348,28 @@ Default: false
 
 Default: undef
 
+##### `http_https_private_key`
+
+Default: undef
+
+##### `http_max_row_limit`
+
+Default: 10000
+
+##### `http_realm`
+
+Default: InfluxDB
+
+##### `subscriber_enabled`
+
+Controls the subscriptions, which can be used to fork a copy of all data
+received by the InfluxDB host.
+Default: true
+
+##### `subscriber_http_timeout`
+
+Default: 30s
+
 ##### `graphite_options`
 
 Controls the listener for InfluxDB line protocol data via Graphite.
@@ -439,6 +414,12 @@ Default true
 ##### `continuous_queries_run_interval`
 
 Default: 1s
+
+##### `max_series_per_database`
+
+Controls the number of series allowed per database. Change the setting
+to 0 to allow an unlimited number of series per database.
+Default: 1000000
 
 ##### `hinted_handoff_enabled`
 
