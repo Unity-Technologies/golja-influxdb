@@ -19,9 +19,6 @@ max-series-per-database = 0
 [data]
   enabled = <%= @data_enabled %>
   dir = "<%= @data_dir %>"
-  max-wal-size = <%= @max_wal_size %>
-  wal-flush-interval = "<%= @wal_flush_interval %>"
-  wal-partition-flush-delay = "<%= @wal_partition_flush_delay %>"
   wal-dir = "<%= @wal_dir %>"
   wal-logging-enabled = <%= @wal_logging_enabled %>
   trace-logging-enabled = <%= @trace_logging_enabled %>
@@ -61,6 +58,7 @@ max-series-per-database = 0
 <% if @max_points_per_block -%>
   max-points-per-block = <%= @max_points_per_block %>
 <% end -%>
+  max-series-per-database = <%= @max_series_per_database %>
 
 [hinted-handoff]
   enabled = <%= @hinted_handoff_enabled %>
@@ -86,6 +84,12 @@ max-series-per-database = 0
 <% end -%>
 <% if @max_select_series -%>
   max-select-series = <%= @max_select_series %>
+<% end -%>
+<% if @max_select_bucket -%>
+  max-select-point = <%= @max_select_point %>
+<% end -%>
+<% if @max_select_point -%>
+  max-select-buckets = <%= @max_select_buckets %>
 <% end -%>
 
 [retention]
@@ -120,6 +124,15 @@ max-series-per-database = 0
 <% if @max_connection_limit -%>
   max-connection-limit = <%= @max_connection_limit %>
 <% end -%>
+<% if @http_https_private_key -%>
+  https-private-key = "<%= @http_https_private_key %>"
+<% end -%>
+  max-row-limit = <%= @http_max_row_limit %>
+  realm = "<%= @http_realm %>"
+
+[subscriber]
+  enabled = <%= @subscriber_enabled %>
+  http-timeout = "<%= @subscriber_http_timeout %>"
 
 <% if @graphite_options and ! @graphite_options.empty? -%>
 <% if @graphite_options.is_a?(Hash) -%>

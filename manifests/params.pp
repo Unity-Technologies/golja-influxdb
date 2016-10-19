@@ -24,9 +24,6 @@ class influxdb::params {
 
   $data_enabled                                 = true
   $data_dir                                     = '/var/lib/influxdb/data'
-  $max_wal_size                                 = 104857600
-  $wal_flush_interval                           = '10m'
-  $wal_partition_flush_delay                    = '2s'
   $wal_dir                                      = '/var/lib/influxdb/wal'
   $wal_logging_enabled                          = true
   $trace_logging_enabled                        = false
@@ -42,6 +39,7 @@ class influxdb::params {
   $compact_full_write_cold_duration             = undef
   $max_points_per_block                         = undef
   $max_connection_limit                         = undef
+  $max_series_per_database                      = 1000000
 
   $hinted_handoff_enabled                       = true
   $hinted_handoff_dir                           = '/var/lib/influxdb/hh'
@@ -52,12 +50,13 @@ class influxdb::params {
   $hinted_handoff_retry_max_interval            = '1m'
   $hinted_handoff_purge_interval                = '1h'
 
-  $shard_writer_timeout                         = '5s'
   $cluster_write_timeout                        = '10s'
   $max_concurrent_queries                       = undef
   $query_timeout                                = undef
   $log_queries_after                            = undef
   $max_select_series                            = undef
+  $max_select_point                             = undef
+  $max_select_buckets                           = undef
 
   $retention_enabled                            = true
   $retention_check_interval                     = '30m'
@@ -83,6 +82,12 @@ class influxdb::params {
   $http_pprof_enabled                           = false
   $http_https_enabled                           = false
   $http_https_certificate                       = '/etc/ssl/influxdb.pem'
+  $http_https_private_key                       = undef
+  $http_max_row_limit                           = 10000
+  $http_realm                                   = 'InfluxDB'
+
+  $subscriber_enabled                           = true
+  $subscriber_http_timeout                      = '30s'
 
   $graphite_options                             = undef
   $collectd_options                             = undef

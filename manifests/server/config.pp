@@ -28,9 +28,6 @@ class influxdb::server::config {
 
   $data_enabled                                 = $influxdb::server::data_enabled
   $data_dir                                     = $influxdb::server::data_dir
-  $max_wal_size                                 = $influxdb::server::max_wal_size
-  $wal_flush_interval                           = $influxdb::server::wal_flush_interval
-  $wal_partition_flush_delay                    = $influxdb::server::wal_partition_flush_delay
   $wal_dir                                      = $influxdb::server::wal_dir
   $wal_logging_enabled                          = $influxdb::server::wal_logging_enabled
   $trace_logging_enabled                        = $influxdb::server::trace_logging_enabled
@@ -46,6 +43,7 @@ class influxdb::server::config {
   $compact_full_write_cold_duration             = $influxdb::server::compact_full_write_cold_duration
   $max_points_per_block                         = $influxdb::server::max_points_per_block
   $max_connection_limit                         = $influxdb::server::max_connection_limit
+  $max_series_per_database                      = $influxdb::server::max_series_per_database
 
   $hinted_handoff_enabled                       = $influxdb::server::hinted_handoff_enabled
   $hinted_handoff_dir                           = $influxdb::server::hinted_handoff_dir
@@ -56,12 +54,13 @@ class influxdb::server::config {
   $hinted_handoff_retry_max_interval            = $influxdb::server::hinted_handoff_retry_max_interval
   $hinted_handoff_purge_interval                = $influxdb::server::hinted_handoff_purge_interval
 
-  $shard_writer_timeout                         = $influxdb::server::shard_writer_timeout
   $cluster_write_timeout                        = $influxdb::server::cluster_write_timeout
   $max_concurrent_queries                       = $influxdb::server::max_concurrent_queries
   $query_timeout                                = $influxdb::server::query_timeout
   $log_queries_after                            = $influxdb::server::log_queries_after
   $max_select_series                            = $influxdb::server::max_select_series
+  $max_select_point                             = $influxdb::server::max_select_point
+  $max_select_buckets                           = $influxdb::server::max_select_buckets
 
   $retention_enabled                            = $influxdb::server::retention_enabled
   $retention_check_interval                     = $influxdb::server::retention_check_interval
@@ -87,6 +86,12 @@ class influxdb::server::config {
   $http_pprof_enabled                           = $influxdb::server::http_pprof_enabled
   $http_https_enabled                           = $influxdb::server::http_https_enabled
   $http_https_certificate                       = $influxdb::server::http_https_certificate
+  $http_https_private_key                       = $influxdb::server::http_https_private_key
+  $http_max_row_limit                           = $influxdb::server::http_max_row_limit
+  $http_realm                                   = $influxdb::server::http_realm
+
+  $subscriber_enabled                            = $influxdb::server::subscriber_enabled
+  $subscriber_http_timeout                       = $influxdb::server::subscriber_http_timeout
 
   $graphite_options                             = $influxdb::server::graphite_options
   $collectd_options                             = $influxdb::server::collectd_options

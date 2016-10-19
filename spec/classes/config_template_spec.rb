@@ -11,9 +11,6 @@ describe 'influxdb::server', :type => :class do
     'leader_lease_timeout' => '500ms',
     'commit_timeout' => '50ms',
     'data_dir' => '/var/opt/influxdb/data',
-    'max_wal_size' => 104857600,
-    'wal_flush_interval' => '10m',
-    'wal_partition_flush_delay' => '2s',
     'shard_writer_timeout' => '5s',
     'cluster_write_timeout' => '5s',
     'retention_enabled' => true,
@@ -34,6 +31,7 @@ describe 'influxdb::server', :type => :class do
     'monitoring_database' => '_internal',
     'monitoring_write_interval' => '24h',
     'continuous_queries_enabled' => true,
+    'max_series_per_database' => 1000000,
     'hinted_handoff_enabled' => true,
     'hinted_handoff_dir' => '/var/opt/influxdb/hh',
     'hinted_handoff_max_size' => 1073741824,
@@ -59,6 +57,7 @@ describe 'influxdb::server', :type => :class do
       it { is_expected.to contain_file('/etc/influxdb/influxdb.conf').with_content(/bind-address = ":8088"/) }
       it { is_expected.to contain_file('/etc/influxdb/influxdb.conf').with_content(/http-bind-address = ":8091"/) }
       it { is_expected.to contain_file('/etc/influxdb/influxdb.conf').with_content(/commit-timeout = "50ms"/) }
+      it { is_expected.to contain_file('/etc/influxdb/influxdb.conf').with_content(/http-timeout = "30s"/) }
 
       case facts[:osfamily]
       when 'Debian'
