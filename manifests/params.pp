@@ -50,6 +50,7 @@ class influxdb::params {
   $hinted_handoff_retry_max_interval            = '1m'
   $hinted_handoff_purge_interval                = '1h'
 
+  $shard_writer_timeout                         = '5s'
   $cluster_write_timeout                        = '10s'
   $max_concurrent_queries                       = undef
   $query_timeout                                = undef
